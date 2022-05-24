@@ -17,12 +17,14 @@ jobs:
     - name: Run tests
       run: sbt test
     - name: Upload cucumber-report
+      if: always()
       uses: actions/upload-artifact@v3
       with:
         name: cucumber-report
         path: target/cucumber
         retention-days: 7
     - name: Upload error screenshots (If an error occurred)
+      if: always()
       uses: actions/upload-artifact@v3
       with:
         name: error-screenshots
