@@ -27,4 +27,4 @@ jobs:
       with:
         name: error-screenshots
         path: target/screenshots
-        retention-days: 7
+        retention-days: 9
