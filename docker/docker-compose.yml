@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    image: form-testing:v1
+    build: .
+    container_name: form-testing
+    restart: always
+    ports:
+      - "8080:80"
