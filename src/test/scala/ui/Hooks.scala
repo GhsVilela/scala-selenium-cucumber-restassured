@@ -24,7 +24,7 @@ class Hooks extends ScalaDsl with EN {
       val screenShot = Hooks.takeScreenshot()
       if (screenShot.isDefined) {
         logger.info(s"Taking error screenshot scenarioName: ${scenario.getName} scenarioId: ${scenario.getId}")
-        FileUtils.copyFile(Hooks.takeScreenshot().get, new File(s"target/screenshots/${scenario.getId}.jpg"))
+        FileUtils.copyFile(Hooks.takeScreenshot().get, new File(s"target/screenshots/${scenario.getId}.png"))
       } else {
         logger.error(s"Error getting web-driver screenshot scenarioName: ${scenario.getName} scenarioId: ${scenario.getId}")
       }
