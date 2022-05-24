@@ -12,19 +12,3 @@ jobs:
       uses: olafurpg/setup-scala@v10
       with:
         java-version: openjdk@1.11
-    - name: Start containers
-      run: docker-compose -f "docker/docker-compose.yml" up -d
-    - name: Run tests
-    - run: sbt test
-    - name: Upload cucumber-report
-      uses: actions/upload-artifact@v3
-      with:
-        name: cucumber-report
-        path: target/cucumber
-        retention-days: 7
-    - name: Upload error screenshots
-      uses: actions/upload-artifact@v3
-      with:
-        name: error-screenshots
-        path: target/screenshots
-        retention-days: 7
