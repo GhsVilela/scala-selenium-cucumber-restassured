@@ -1,10 +1,13 @@
 # scala-selenium-cucumber-restassured
 
+#### Setup scala
+
+https://www.scala-lang.org/download/
+
 #### Start docker
 
 ```sh
-cd docker
-docker-compose up -d
+docker-compose -f "docker/docker-compose.yml" up -d --build
 ```
 
 #### Run Tests
