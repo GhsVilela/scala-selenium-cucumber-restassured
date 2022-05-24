@@ -13,4 +13,6 @@ jobs:
       with:
         java-version: openjdk@1.11
     - name: Start containers
-      run: docker-compose -f "docker/docker-compose.yml" up -d
+      run: docker-compose -f "docker/docker-compose.yml" up -d --build
+    - name: Run tests
+    - run: sbt test
