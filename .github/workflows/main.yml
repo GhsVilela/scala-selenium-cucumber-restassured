@@ -22,9 +22,9 @@ jobs:
         name: cucumber-report
         path: target/cucumber
         retention-days: 7
-    - name: Upload error screenshots (If an error occurred)
+    - name: Upload error screenshots
       uses: actions/upload-artifact@v3
       with:
         name: error-screenshots
         path: target/screenshots
-        retention-days: 9
+        retention-days: 7
