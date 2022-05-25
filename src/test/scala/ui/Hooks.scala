@@ -2,13 +2,16 @@ package ui
 
 import java.io.File
 
-import io.cucumber.scala.{EN, ScalaDsl, Scenario}
+import io.cucumber.scala.{ScalaDsl, Scenario}
 import org.apache.commons.io.FileUtils
 import org.openqa.selenium.{OutputType, TakesScreenshot}
 import org.slf4j.{Logger, LoggerFactory}
 
-object Hooks extends ScalaDsl with EN {
-  def takeScreenshot(): Option[File] = {
+object Hooks extends ScalaDsl {
+  private def takeScreenshot(): Option[File] = {
+    if (isAlertPresent) {
+      alertBox.switch(webDriver).dismiss()
+    }
     Option(webDriver.asInstanceOf[TakesScreenshot].getScreenshotAs(OutputType.FILE))
   }
   AfterAll {
@@ -16,8 +19,8 @@ object Hooks extends ScalaDsl with EN {
   }
 }
 
-class Hooks extends ScalaDsl with EN {
-  val logger: Logger = LoggerFactory.getLogger(classOf[Hooks])
+class Hooks extends ScalaDsl {
+ private  val logger: Logger = LoggerFactory.getLogger(classOf[Hooks])
 
   After { scenario : Scenario =>
     if (scenario.isFailed) {

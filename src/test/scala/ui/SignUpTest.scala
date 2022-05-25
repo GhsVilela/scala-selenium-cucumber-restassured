@@ -7,6 +7,7 @@ import org.scalatestplus.selenium.WebBrowser
 import ui.pages.HomePage
 
 import scala.language.postfixOps
+import scala.util.Random
 
 class SignUpTest extends ScalaDsl with EN with Matchers with WebBrowser {
 
@@ -18,21 +19,38 @@ class SignUpTest extends ScalaDsl with EN with Matchers with WebBrowser {
     go to homePage
   }
 
-  And("""a username {string} field is filled""") { (username: String) =>
+  And("""username {string} field is filled""") { (username: String) =>
     click on xpath(homePage.username)
     enter(username)
   }
 
-  And("""a email {string} field is filled""") { (email: String) =>
+  And("""email {string} field is filled""") { (email: String) =>
     click on xpath(homePage.email)
     enter(email)
   }
 
-  When("""click on sign up button""") { () =>
+  And("""password field is filled""") { () =>
+    click on xpath(homePage.password)
+    enter(Random.nextLong().toString)
+  }
+
+  When("""user clicks on sign up button""") { () =>
     click on xpath(homePage.signUpButton)
   }
 
-  Then("""a required field message is displayed""") { () =>
-    //TODO
+  Then("""sign up is not completed due to missing required field""") { () =>
+    val validateRequiredField = find(XPathQuery(homePage.password))
+    validateRequiredField.isDefined shouldBe true
+    validateRequiredField.get.isDisplayed shouldBe true
+    validateRequiredField.get.attribute("required") contains "true"
+    validateRequiredField.get.attribute("value") contains ""
+    isAlertPresent shouldBe false
+  }
+
+  Then("""sign up is completed successfully""") { () =>
+    isAlertPresent shouldBe true
+    val alert = alertBox.switch(webDriver)
+    alert.getText shouldBe "Sign up successfully"
+    alert.dismiss()
   }
 }

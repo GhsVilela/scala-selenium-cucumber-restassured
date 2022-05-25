@@ -1,7 +1,8 @@
 import io.github.bonigarcia.wdm.WebDriverManager
 import org.openqa.selenium.chrome.{ChromeDriver, ChromeOptions}
+import org.scalatestplus.selenium.WebBrowser
 
-package object ui {
+package object ui extends WebBrowser {
   implicit val webDriver: ChromeDriver = {
     WebDriverManager.chromedriver().setup()
     val options = new ChromeOptions
@@ -13,6 +14,15 @@ package object ui {
 
   def sendKeys(element: String, text: String): Unit = {
     webDriver.findElementByXPath(element).sendKeys(text)
+  }
+
+  def isAlertPresent: Boolean = {
+    try {
+      alertBox.switch(webDriver)
+      true
+    } catch {
+      case _: Throwable => false
+    }
   }
 
   def quit(): Unit = {
