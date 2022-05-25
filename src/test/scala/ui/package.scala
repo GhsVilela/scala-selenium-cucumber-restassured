@@ -12,10 +12,6 @@ package object ui extends WebBrowser {
     new ChromeDriver(options)
   }
 
-  def sendKeys(element: String, text: String): Unit = {
-    webDriver.findElementByXPath(element).sendKeys(text)
-  }
-
   def isAlertPresent: Boolean = {
     try {
       alertBox.switch(webDriver)
