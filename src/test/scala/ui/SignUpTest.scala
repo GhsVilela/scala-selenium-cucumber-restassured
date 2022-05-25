@@ -4,42 +4,42 @@ import io.cucumber.scala.{EN, ScalaDsl}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Seconds, Span}
 import org.scalatestplus.selenium.WebBrowser
-import ui.pages.HomePage
+import ui.pages.SignUpPage
 
 import scala.language.postfixOps
 import scala.util.Random
 
 class SignUpTest extends ScalaDsl with EN with Matchers with WebBrowser {
 
-  val homePage = new HomePage
+  val signUpPage = new SignUpPage
 
   implicitlyWait(Span(3, Seconds))
 
   Given("""that registration page is opened""") { () =>
-    go to homePage
+    go to signUpPage
   }
 
   And("""username {string} field is filled""") { (username: String) =>
-    click on xpath(homePage.username)
+    click on xpath(signUpPage.username)
     enter(username)
   }
 
   And("""email {string} field is filled""") { (email: String) =>
-    click on xpath(homePage.email)
+    click on xpath(signUpPage.email)
     enter(email)
   }
 
   And("""password field is filled""") { () =>
-    click on xpath(homePage.password)
+    click on xpath(signUpPage.password)
     enter(Random.nextLong().toString)
   }
 
   When("""user clicks on sign up button""") { () =>
-    click on xpath(homePage.signUpButton)
+    click on xpath(signUpPage.signUpButton)
   }
 
   Then("""sign up is not completed due to missing required field""") { () =>
-    val validateRequiredField = find(XPathQuery(homePage.password))
+    val validateRequiredField = find(XPathQuery(signUpPage.password))
     validateRequiredField.isDefined shouldBe true
     validateRequiredField.get.isDisplayed shouldBe true
     validateRequiredField.get.attribute("required") contains "true"
