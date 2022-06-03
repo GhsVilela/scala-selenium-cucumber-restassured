@@ -1,6 +1,7 @@
 package ui
 
 import io.cucumber.scala.{EN, ScalaDsl}
+import org.apache.commons.lang3.StringUtils
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Seconds, Span}
 import org.scalatestplus.selenium.WebBrowser
@@ -43,7 +44,9 @@ class SignUpTest extends ScalaDsl with EN with Matchers with WebBrowser {
     validateRequiredField.isDefined shouldBe true
     validateRequiredField.get.isDisplayed shouldBe true
     validateRequiredField.get.attribute("required") contains "true"
-    validateRequiredField.get.attribute("value") contains ""
+    val inputValue = validateRequiredField.get.attribute("value")
+    inputValue.isDefined shouldBe true
+    inputValue.get shouldBe StringUtils.EMPTY
     isAlertPresent shouldBe false
   }
 
