@@ -1,5 +1,7 @@
 # scala-selenium-cucumber-restassured
 
+[![test](https://github.com/GhsVilela/scala-selenium-cucumber-restassured/actions/workflows/main.yml/badge.svg)](https://github.com/GhsVilela/scala-selenium-cucumber-restassured/actions/workflows/main.yml)
+
 #### Setup scala
 
 https://www.scala-lang.org/download/
